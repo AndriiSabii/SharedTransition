@@ -1,6 +1,7 @@
 plugins {
     id "com.android.library"
     id "kotlin-android"
+    id 'maven-publish'
 }
 
 android {
@@ -49,4 +50,17 @@ dependencies {
     implementation "androidx.compose.foundation:foundation:$compose_version"
     // Integration with ViewModels
     implementation "androidx.navigation:navigation-compose:$compose_navigation_version"
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = "om.mustachenko.sharedtransition"
+                artifactId = "shared-transition"
+                version = '1.0.0'
+            }
+        }
+    }
 }
